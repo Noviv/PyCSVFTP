@@ -5,15 +5,25 @@ from shutil import move
 from os import remove, close
 import csv
 import fileinput
+import os
 
-ip = raw_input('Server IP: ')
+ret = -1
+while ret != 0:
+    ip = raw_input('Server IP: ')
+    ret = os.system('ping -n 1 -w 1000 ' + ip + '  >nul')
+    if ret != 0:
+        print "No response from IP address. Enter another."
+
+username = raw_input('Username: ')
+password = raw_input('Password: ')
 filename = raw_input('File path: ')#FILE PATH
 server_wd = raw_input('Server working directory: ')
-local_wd = raw_input('Local working directory: ')
 
 ftp = FTP(ip)
 ftp.login()
 ftp.cwd(server_wd)#SERVER WD
+with open(filename, 'r+') as file:
+    ftp.retrlines('retr ' + filename, file.write)
 
 def replace(file_path, pattern, subst):
     fh, abs_path = mkstemp()
@@ -82,7 +92,7 @@ def callback():
     VALUES[getindex()] = e2.get()
     if orig != rep:
         print 'Replacing in file...'
-        replace(local_wd + filename, orig, rep)#LOCAL WD
+        replace(filename, orig, rep)#LOCAL WD
         print 'FTPing over file...'
         with open(filename, 'r+') as file:
             print ftp.storlines('STOR ' + filename, file)
