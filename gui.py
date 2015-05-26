@@ -22,8 +22,8 @@ server_wd = raw_input('Server working directory: ')
 ftp = FTP(ip)
 ftp.login()
 ftp.cwd(server_wd)#SERVER WD
-with open(filename, 'r+') as file:
-    ftp.retrlines('retr ' + filename, file.write)
+#with open(filename, 'r+') as file:
+#    ftp.retrlines('retr ' + filename, file.write)
 
 def replace(file_path, pattern, subst):
     fh, abs_path = mkstemp()
@@ -103,11 +103,19 @@ b1.pack()
 
 def quitcall():
     ftp.close()
-    master.quit
+    master.destroy()
     exit()
 
 b2 = Button(master, text="Quit", width=20, command=quitcall)
 b2.pack()
+
+def restartcall():
+    ftp.close()
+    master.destroy()
+    sys.exit(5)
+
+b3 = Button(master, text="Restart", width=20, command=restartcall)
+b3.pack()
 
 master.update_idletasks()
 w = master.winfo_screenwidth()
