@@ -4,6 +4,4 @@
 cls
 python gui.py
 echo %errorlevel%
-if errorlevel 5 {
-	GOTO LOOP
-}
+if errorlevel 5 GOTO LOOP

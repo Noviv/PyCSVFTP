@@ -104,7 +104,7 @@ b1.pack()
 def quitcall():
     ftp.close()
     master.destroy()
-    exit()
+    sys.exit(0)
 
 b2 = Button(master, text="Quit", width=20, command=quitcall)
 b2.pack()
