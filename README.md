@@ -1,4 +1,4 @@
 # PyCSVFTP
 A Python FTP client for CSV files.
 
-Run program by starting runner.bat
+Install PyCSVFTP by running PyCSVFTP.exe then open runner.bat in the intallation directory.
