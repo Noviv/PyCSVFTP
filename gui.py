@@ -22,8 +22,8 @@ server_wd = raw_input('Server working directory: ')
 ftp = FTP(ip)
 ftp.login()
 ftp.cwd(server_wd)#SERVER WD
-#with open(filename, 'r+') as file:
-#    ftp.retrlines('retr ' + filename, file.write)
+with open(filename, 'r+') as file:
+    ftp.retrlines('retr ' + filename, file.write)
 
 def replace(file_path, pattern, subst):
     fh, abs_path = mkstemp()
@@ -58,7 +58,8 @@ variable = StringVar(master)
 variable.trace('w', numberchange)
 number = StringVar(master)
 
-status = Label(master, text='FTP Inactive', bd=1, relief=SUNKEN, anchor=W)
+statustext = 'FTP Active'
+status = Label(master, text=statustext, anchor=W)
 status.pack(side=BOTTOM, fill=X)
 
 OPTIONS = []
@@ -91,14 +92,14 @@ def callback():
     rep = variable.get() + ',' + e2.get()
     VALUES[getindex()] = e2.get()
     if orig != rep:
-        print 'Replacing in file...'
+        statustext = 'Replacing in file...'
         replace(filename, orig, rep)#LOCAL WD
-        print 'FTPing over file...'
+        statustext = 'FTPing over file...'
         with open(filename, 'r+') as file:
             print ftp.storlines('STOR ' + filename, file)
         loadValues()
 
-b1 = Button(master, text="Send to Robot", width=20, command=callback)
+b1 = Button(master, text="Send File", width=20, command=callback)
 b1.pack()
 
 def quitcall():
