@@ -27,8 +27,8 @@ server_wd = "/"
 ftp = FTP(ip)
 ftp.login()
 ftp.cwd(server_wd)#SERVER WD
-with open(filename, 'r+') as file:
-    ftp.retrlines('retr ' + filename, file.write)
+#with open(filename, 'r+') as file:
+#    ftp.retrlines('retr ' + filename, file.write)
 
 def replace(file_path, pattern, subst):
     fh, abs_path = mkstemp()
