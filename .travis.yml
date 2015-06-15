@@ -1,6 +1,6 @@
 language: python
 python:
   - "2.7"
-script: gui.py
+script: python gui.py
 before_install:
   - sudo apt-get install python-tk
