@@ -7,30 +7,23 @@ import csv
 import fileinput
 import os
 
-#ret = -1
-ret = 0
-ip = "ftp.gnu.org"
+ret = -1
 while ret != 0:
-    #ip = raw_input('Server IP: ')
-    ip = "ftp.gnu.org"
+    ip = raw_input('Server IP: ')
     ret = os.system('ping -n 1 -w 1000 ' + ip + '  >nul')
     if ret != 0:
         print "No response from IP address. Enter another."
 
-#username = raw_input('Username: ')
-username = "anonymous"
-#password = raw_input('Password: ')
-password = ""
-#filename = raw_input('File path: ')#FILE PATH
-filename = "data.txt"
-#server_wd = raw_input('Server working directory: ')
-server_wd = "/"
+username = raw_input('Username: ')
+password = raw_input('Password: ')
+filename = raw_input('File path: ')#FILE PATH
+server_wd = raw_input('Server working directory: ')
 
 ftp = FTP(ip)
 ftp.login()
 ftp.cwd(server_wd)#SERVER WD
-#with open(filename, 'r+') as file:
-#    ftp.retrlines('retr ' + filename, file.write)
+with open(filename, 'r+') as file:
+    ftp.retrlines('retr ' + filename, file.write)
 
 def replace(file_path, pattern, subst):
     fh, abs_path = mkstemp()
