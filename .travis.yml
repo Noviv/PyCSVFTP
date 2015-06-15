@@ -3,4 +3,4 @@ python:
   - "2.7"
 script: gui.py
 before_install:
-  - sudo apt-get python-tk
+  - sudo apt-get install python-tk
