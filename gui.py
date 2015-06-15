@@ -7,7 +7,8 @@ import csv
 import fileinput
 import os
 
-ret = -1
+#ret = -1
+ret = 0
 while ret != 0:
     #ip = raw_input('Server IP: ')
     ip = "ftp.gnu.org"
